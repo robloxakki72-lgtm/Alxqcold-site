@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рекорд @alxqcold</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0b1021 0%, #1d263b 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Декоративные елочки по углам */
+        .tree {
+            position: absolute;
+            font-size: 60px;
+            opacity: 0.8;
+            filter: drop-shadow(0 0 10px rgba(0, 255, 150, 0.5));
+            animation: pulseTree 3s infinite alternate;
+        }
+        .tree-top-left { top: 20px; left: 20px; transform: rotate(-15deg); }
+        .tree-top-right { top: 20px; right: 20px; transform: rotate(15deg); }
+        .tree-bottom-left { bottom: 20px; left: 20px; transform: rotate(15deg); }
+        .tree-bottom-right { bottom: 20px; right: 20px; transform: rotate(-15deg); }
+
+        @keyframes pulseTree {
+            0% { transform: scale(1) rotate(var(--rot, 0deg)); }
+            100% { transform: scale(1.08) rotate(var(--rot, 0deg)); }
+        }
+
+        /* Карточка с контентом */
+        .card {
+            background: rgba(25, 33, 56, 0.85);
+            border: 2px solid #fe2c55;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(254, 44, 85, 0.3);
+            text-align: center;
+            max-width: 500px;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+        }
+
+        .username {
+            color: #fe2c55;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .record-badge {
+            background: linear-gradient(45deg, #fe2c55, #ff6b8b);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            box-shadow: 0 4px 15px rgba(254, 44, 85, 0.4);
+        }
+
+        /* Падающие реалистичные снежинки */
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            background: #ffffff;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10px) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(105vh) translateX(20px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Елочки по краям экрана -->
+    <div class="tree tree-top-left" style="--rot: -15deg;">🎄</div>
+    <div class="tree tree-top-right" style="--rot: 15deg;">🎄</div>
+    <div class="tree tree-bottom-left" style="--rot: 15deg;">🎄</div>
+    <div class="tree tree-bottom-right" style="--rot: -15deg;">🎄</div>
+
+    <!-- Основной блок -->
+    <div class="card">
+        <div class="username">@alxqcold</div>
+        <h1>Популярная кампания собрала более <span style="color: #00ffcc;">250 000 пользователей</span> за год!</h1>
+        <p>Это абсолютный рекорд и грандиозное достижение!</p>
+        <div class="record-badge">🏆 НОВЫЙ РЕКОРД</div>
+    </div>
+
+    <!-- Скрипт для создания падающих снежинок -->
+    <script>
+        function createSnowflake() {
+            const snow = document.createElement('div');
+            snow.classList.add('snowflake');
+            
+            // Случайный размер снежинки (от 2 до 6 пикселей)
+            const size = Math.random() * 4 + 2;
+            snow.style.width = size + 'px';
+            snow.style.height = size + 'px';
+            
+            // Случайная позиция по горизонтали
+            snow.style.left = Math.random() * window.innerWidth + 'px';
+            
+            // Случайная скорость падения (от 3 до 8 секунд)
+            const duration = Math.random() * 5 + 3;
+            snow.style.animationDuration = duration + 's';
+            
+            // Разная прозрачность для эффекта глубины
+            snow.style.opacity = Math.random() * 0.7 + 0.3;
+            
+            document.body.appendChild(snow);
+
+            // Удаляем снежинку после завершения анимации
+            setTimeout(() => {
+                snow.remove();
+            }, duration * 1000);
+        }
+
+        // Создаем новые снежинки каждые 50 миллисекунд
+        setInterval(createSnowflake, 50);
+    </script>
+</body>
+</html>
